@@ -17,45 +17,41 @@ public class SortingImpl implements Sorting {
         int left = 0;
         int right = array.length - 1;
         int countPermutations = 0;
-        int swapped;
+        boolean swapped;
 
-        while (true) {
-            swapped = 0;
-            for (int i = 1; i < array.length; i++) {
-                if (left == right) {
-                    return getSortingResult(array, countPermutations,
-                            Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
-                }
-
-                if (array[i] < array[i - 1]) {
-                    swap(array, i - 1, i);
+        do {
+            swapped = false;
+            for (int i = left; i < right; i++) {
+                if (array[i] > array[i + 1]) {
+                    swap(array, i, i + 1);
+                    swapped = true;
                     countPermutations++;
-                    swapped++;
-                } else {
-                    if (swapped == 0) {
-                        left = i;
-                    }
                 }
             }
+            right--;
 
-            swapped = 0;
-            for (int i = array.length - 2; i > 0; i--) {
-                if (left == right) {
-                    return getSortingResult(array, countPermutations,
-                            Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
-                }
+            if (swapped == false) {
+                break;
+            }
 
+            swapped = false;
+            for (int i = right; i > left; i--) {
                 if (array[i] < array[i - 1]) {
                     swap(array, i, i - 1);
+                    swapped = true;
                     countPermutations++;
-                    swapped++;
-                } else {
-                    if (swapped == 0) {
-                        left = i;
-                    }
                 }
             }
-        }
+            left++;
+
+            if (swapped == false) {
+                break;
+            }
+
+        } while (left < right);
+
+        return getSortingResult(array, countPermutations,
+                Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
     }
 
     private void swap(Integer[] array, int i, int j) {
