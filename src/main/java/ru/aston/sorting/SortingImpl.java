@@ -1,7 +1,17 @@
-public class Sorting {
+package ru.aston.sorting;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+
+public class SortingImpl implements Sorting {
+
+    @Override
     public SortingResult shakerSort(Integer[] array) {
+        LocalDateTime start = LocalDateTime.now();
+
         if (array.length <= 1) {
-            return getSortingResult(array, 0);
+            return getSortingResult(array, 0,
+                    Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
         }
 
         int left = 0;
@@ -13,7 +23,8 @@ public class Sorting {
             swapped = 0;
             for (int i = 1; i < array.length; i++) {
                 if (left == right) {
-                    return getSortingResult(array, countPermutations);
+                    return getSortingResult(array, countPermutations,
+                            Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
                 }
 
                 if (array[i] < array[i - 1]) {
@@ -30,7 +41,8 @@ public class Sorting {
             swapped = 0;
             for (int i = array.length - 2; i > 0; i--) {
                 if (left == right) {
-                    return getSortingResult(array, countPermutations);
+                    return getSortingResult(array, countPermutations,
+                            Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
                 }
 
                 if (array[i] < array[i - 1]) {
@@ -52,10 +64,11 @@ public class Sorting {
         array[j] = copy;
     }
 
-    private SortingResult getSortingResult(Integer[] array, int countPermutations) {
+    private SortingResult getSortingResult(Integer[] array, int countPermutations, Duration timeSpent) {
         return SortingResult.builder()
                 .array(array)
                 .countPermutations(countPermutations)
+                .timeSpent(timeSpent)
                 .build();
     }
 }

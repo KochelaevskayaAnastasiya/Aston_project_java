@@ -1,4 +1,8 @@
+package ru.aston.sorting;
+
 import lombok.*;
+
+import java.time.Duration;
 
 @Getter
 @Builder
@@ -8,4 +12,5 @@ import lombok.*;
 public class SortingResult {
     private Integer[] array;
     private int countPermutations;
+    private Duration timeSpent;
 }

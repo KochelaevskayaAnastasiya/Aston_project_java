@@ -1,11 +1,17 @@
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import ru.aston.sorting.Sorting;
+import ru.aston.sorting.SortingImpl;
+import ru.aston.sorting.SortingResult;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RequiredArgsConstructor
-public class SortingTest {
-    private final Sorting sorting = new Sorting();
+public class SortingImplTest {
+    private final Sorting sorting = new SortingImpl();
 
     @Test
     public void shakerSortArrayEmpty() {
@@ -101,5 +107,21 @@ public class SortingTest {
 
         assertArrayEquals(new Integer[]{-10, -9, -1, 0, 1, 5, 7}, sortingResult.getArray());
         assertEquals(16, sortingResult.getCountPermutations());
+    }
+
+    @Test
+    public void shakerSortArray4() {
+        Integer[] array = new Integer[1000];
+
+        for (int i = 0; i < 1000; i++) {
+            array[i] = (int) (Math.random() * 100);
+        }
+
+        SortingResult sortingResult = sorting.shakerSort(array);
+
+        Integer[] arrayTest = Arrays.copyOf(array, 1000);
+        Arrays.sort(arrayTest);
+
+        assertArrayEquals(arrayTest, sortingResult.getArray());
     }
 }
