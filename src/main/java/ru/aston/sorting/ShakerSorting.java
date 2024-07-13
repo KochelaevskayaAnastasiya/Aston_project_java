@@ -3,10 +3,10 @@ package ru.aston.sorting;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class SortingImpl implements Sorting {
+public class ShakerSorting implements SortingStrategy {
 
     @Override
-    public SortingResult shakerSort(Integer[] array) {
+    public SortingResult sort(Integer[] array) {
         LocalDateTime start = LocalDateTime.now();
 
         if (array.length <= 1) {
