@@ -37,7 +37,6 @@ public class GnomeSort implements SortingStrategy_Dub{
         int length = array.length;
 
         if (length <= 1){
-            System.out.println("Array is empty or small. Write new data");
             return getSortingResult(array, countPermutation,
                     Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
         }
