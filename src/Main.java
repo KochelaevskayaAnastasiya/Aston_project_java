@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,6 +35,7 @@ public class Main {
                             System.out.println("1 - С консоли");
                             System.out.println("2 - Из файла");
                             System.out.println("3 - Рандомно");
+                            System.out.println("4 - Вернуться в главное меню");
                             choiceType = scan.nextInt();
                             scan.nextLine();
                             switch (choiceType) {
@@ -77,6 +75,11 @@ public class Main {
                                 case 2:
                                     break;
                                 case 3:
+                                    array = new Random().ints(-100,100).limit(n).boxed().toArray(Integer[]::new);
+                                    choiceType = 4;
+                                    break;
+                                case 4:
+                                    System.out.println("Возвращаемся в главное меню.");
                                     break;
                                 default:
                                     System.out.println("Неверный ввод. Введите число от 1 до 3");
