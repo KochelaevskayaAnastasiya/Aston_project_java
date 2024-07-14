@@ -88,8 +88,6 @@ public class Main {
                                     //    array = getArray...
                                     } catch (FileNotFoundException e) {
                                         System.out.println("Файл не найден. Повторите ввод.");
-                                    } catch (IOException e) {
-                                        System.out.println("Ошибка ввода. Убедитесь, что файл содержит массив целых чисел.");
                                     }
                                     break;
                                 case 3:
