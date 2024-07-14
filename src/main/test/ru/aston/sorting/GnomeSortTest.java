@@ -1,9 +1,7 @@
+package ru.aston.sorting;
+
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import ru.aston.sorting.SortOption;
-import ru.aston.sorting.SortingStrategy_Dub;
-import ru.aston.sorting.GnomeSort;
-import ru.aston.sorting.SortingResult;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -13,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RequiredArgsConstructor
 public class GnomeSortTest {
-    private final SortingStrategy_Dub sorting = new GnomeSort();
+    private final SortingStrategy sorting = new GnomeSort();
 
     static Integer[] reverseArr(Integer[] array) {
         Integer [] newArray = new Integer[array.length];
@@ -24,7 +22,6 @@ public class GnomeSortTest {
 
         return newArray;
     }
-
 
     @Test
     public void gnomeSortArrayEmpty() {
@@ -91,7 +88,6 @@ public class GnomeSortTest {
         assertEquals(10, sortingResult.getCountPermutations());
     }
 
-
     @Test
     public void gnomeSortArrayEqualsElement() {
         Integer[] arrayTest = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
@@ -150,7 +146,6 @@ public class GnomeSortTest {
             array[i] = rand.nextInt(2001) - 1000;;
         }
 
-
         SortingResult sortingResult = sorting.sort(array, SortOption.ALL);
 
         Integer[] arrayTest = Arrays.copyOf(array, 1000);
@@ -158,6 +153,4 @@ public class GnomeSortTest {
 
         assertArrayEquals(arrayTest, sortingResult.getArray());
     }
-
-
 }

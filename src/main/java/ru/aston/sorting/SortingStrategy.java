@@ -1,5 +1,5 @@
 package ru.aston.sorting;
 
 public interface SortingStrategy {
-    SortingResult sort(Integer[] array);
+    SortingResult sort(Integer[] array, SortOption sortOption);
 }

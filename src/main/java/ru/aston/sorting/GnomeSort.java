@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-public class GnomeSort implements SortingStrategy_Dub{
+public class GnomeSort implements SortingStrategy {
 
     private void swap(Integer[] array, int i, int j) {
         int copy = array[i];
