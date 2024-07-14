@@ -3,7 +3,6 @@ package ru.aston;
 import java.io.*;
 
 import ru.aston.sorting.GnomeSort;
-import ru.aston.sorting.SortOption;
 import ru.aston.sorting.SortingStrategy;
 
 import java.util.*;
@@ -131,7 +130,7 @@ public class Main {
                 case 3:
                     int n3 = getArraySize(scan);
                     if (n3 > 0) {
-                        array = new Random().ints(-100, 100).limit(n3).boxed().toArray(Integer[]::new);
+                        array = new Random().ints(Integer.MIN_VALUE, Integer.MAX_VALUE).limit(n3).boxed().toArray(Integer[]::new);
                         choiceType = 4;
                     }
                     break;

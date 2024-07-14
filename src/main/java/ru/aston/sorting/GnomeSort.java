@@ -25,7 +25,7 @@ public class GnomeSort implements SortingStrategy {
         int length = array.length;
 
         if (length <= 1) {
-            return getSortingResult(array, countPermutation, Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
+            return getSortingResult(array, countPermutation, Duration.between(start, LocalDateTime.now()));
         }
 
         int currentIndex = 0;
@@ -42,7 +42,7 @@ public class GnomeSort implements SortingStrategy {
         }
 
         LocalDateTime end = LocalDateTime.now();
-        Duration timeSpent = Duration.between(start.toLocalTime(), end.toLocalTime());
+        Duration timeSpent = Duration.between(start, end);
 
         return getSortingResult(array, countPermutation, timeSpent);
     }

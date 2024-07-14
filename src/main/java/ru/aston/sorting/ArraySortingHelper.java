@@ -2,7 +2,7 @@ package ru.aston.sorting;
 
 import java.time.Duration;
 
-public class ArraySortingHelper {
+public final class ArraySortingHelper {
     private ArraySortingHelper() {
     }
 
