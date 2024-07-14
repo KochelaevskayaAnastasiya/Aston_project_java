@@ -2,12 +2,12 @@ package ru.aston;
 
 import java.io.*;
 
-import ru.aston.sorting.GnomeSort;
-import ru.aston.sorting.SortingStrategy;
+
+import ru.aston.sorting.*;
 
 import java.util.*;
 
-import static ru.aston.sorting.SortOption.ALL;
+import static ru.aston.sorting.SortOption.*;
 
 public class Main {
     public static Integer[] getArray(Scanner scan, String arrayString, int n){
@@ -66,9 +66,9 @@ public class Main {
         System.out.println("3 - Рандомно");
         System.out.println("4 - Вернуться в главное меню");
     }
-    public static int menuTypeSorted(Scanner scan){
+    public static SortOption menuTypeSorted(Scanner scan){
         int choiceType = 0;
-        int typeSort = -1;
+        SortOption typeSort = null;
         while (choiceType != 4) {
             System.out.println("1 - Обычная сортировка");
             System.out.println("2 - Только четные элементы");
@@ -77,13 +77,16 @@ public class Main {
             scan.nextLine();
             switch (choiceType) {
                 case 1:
-                    typeSort = 1;
+                    typeSort = ALL;
+                    choiceType = 4;
                     break;
                 case 2:
-                    typeSort = 2;
+                    typeSort = EVEN;
+                    choiceType = 4;
                     break;
                 case 3:
-                    typeSort = 3;
+                    typeSort = ODD;
+                    choiceType = 4;
                     break;
                 default:
                     System.out.println("Неверный ввод. Введите число от 1 до 3");
@@ -143,6 +146,14 @@ public class Main {
         }
         return array;
     }
+    public static void sortArray(Scanner scan, SortingStrategy sortingStrategy, Integer[] array){
+        Integer[] copyArray = Arrays.copyOf(array, array.length);
+        SortingResult sortingResult = sortingStrategy.sort(copyArray, menuTypeSorted(scan));//сортировать копию
+        System.out.println("Отсортированный массив: " + Arrays.toString(sortingResult.getArray()));
+        System.out.println("Количество перестановок: " + sortingResult.getCountPermutations());
+        System.out.println("Время: " + sortingResult.getTimeSpent().getSeconds());
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         SortingStrategy sortingStrategy;
@@ -160,11 +171,12 @@ public class Main {
                     case 2:
                         System.out.println("Gnome Sort");
                         sortingStrategy = new GnomeSort();
-                        sortingStrategy.sort(array, ALL);//сортировать копию
-                        System.out.println(Arrays.toString(array));
+                        sortArray(scan, sortingStrategy, array);
                         break;
                     case 3:
                         System.out.println("Shaker Sort");
+                        sortingStrategy = new ShakerSorting();
+                        sortArray(scan, sortingStrategy, array);
                         break;
                     case 4:
                         System.out.println("Завершение работы");
