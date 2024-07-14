@@ -1,5 +1,6 @@
 package ru.aston;
 
+import java.io.*;
 import ru.aston.sorting.SortingStrategy;
 
 import java.util.*;
@@ -105,6 +106,21 @@ public class Main {
                     }
                     break;
                 case 2:
+                    System.out.println("Укажите путь к файлу с данными");
+                    String filePath = scan.nextLine();
+
+                    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                        StringBuilder result = new StringBuilder();
+                        int i;
+                        while ((i = reader.read()) != -1){
+                            result.append((char)i);
+                        }
+                        //    array = getArray...
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Файл не найден. Повторите ввод.");
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     int n3 = getArraySize(scan);
@@ -124,7 +140,7 @@ public class Main {
     }
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        SortingStrategy sortingStrategy;
+        //SortingStrategy sortingStrategy;
         int choice = 0;
         Integer[] array = new Integer[0];
         while (choice != 4) {
