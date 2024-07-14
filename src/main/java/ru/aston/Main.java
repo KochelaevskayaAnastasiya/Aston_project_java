@@ -1,6 +1,8 @@
 package ru.aston;
 
+import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -75,6 +77,21 @@ public class Main {
                                     }
                                     break;
                                 case 2:
+                                    System.out.println("Укажите путь к файлу с данными");
+                                    String filePath = scan.nextLine();
+
+                                    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                                        StringBuilder result = new StringBuilder();
+                                        int i;
+                                        while ((i = reader.read()) != -1){
+                                            result.append((char)i);
+                                        }
+                                    //    array = getArray...
+                                    } catch (FileNotFoundException e) {
+                                        System.out.println("Файл не найден. Повторите ввод.");
+                                    } catch (IOException e) {
+                                        System.out.println("Ошибка ввода. Убедитесь, что файл содержит массив целых чисел.");
+                                    }
                                     break;
                                 case 3:
                                     array = new Random().ints(-100,100).limit(n).boxed().toArray(Integer[]::new);
