@@ -3,24 +3,31 @@ package ru.aston.sorting;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import static ru.aston.sorting.ArraySortingHelper.swap;
+import static ru.aston.sorting.SortOption.*;
+import static ru.aston.sorting.ArraySortingHelper.getSortingResult;
+
 public class ShakerSorting implements SortingStrategy {
-
     @Override
-    public SortingResult sort(Integer[] array) {
+    public SortingResult sort(Integer[] array, SortOption sortOption) {
         LocalDateTime start = LocalDateTime.now();
-
         if (array.length <= 1) {
-            return getSortingResult(array, 0,
-                    Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
+            return getSortingResult(array, 0, Duration.between(start, LocalDateTime.now()));
         }
 
+        if (sortOption.equals(ALL)) {
+            return shakerSortAll(array, start);
+        }
+        return shakerSortEvenOrOdd(array, start, sortOption == EVEN);
+    }
+
+    private SortingResult shakerSortAll(Integer[] array, LocalDateTime start) {
         int left = 0;
         int right = array.length - 1;
         int countPermutations = 0;
-        boolean swapped;
 
         do {
-            swapped = false;
+            boolean swapped = false;
             for (int i = left; i < right; i++) {
                 if (array[i] > array[i + 1]) {
                     swap(array, i, i + 1);
@@ -50,21 +57,69 @@ public class ShakerSorting implements SortingStrategy {
 
         } while (left < right);
 
-        return getSortingResult(array, countPermutations,
-                Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()));
+        return getSortingResult(array, countPermutations, Duration.between(start, LocalDateTime.now()));
     }
 
-    private void swap(Integer[] array, int i, int j) {
-        int copy = array[i];
-        array[i] = array[j];
-        array[j] = copy;
-    }
+    private SortingResult shakerSortEvenOrOdd(Integer[] array, LocalDateTime start, boolean even) {
+        Integer left = 0;
+        Integer right = array.length - 1;
+        int countPermutations = 0;
+        Integer first = null;
+        Integer next;
 
-    private SortingResult getSortingResult(Integer[] array, int countPermutations, Duration timeSpent) {
-        return SortingResult.builder()
-                .array(array)
-                .countPermutations(countPermutations)
-                .timeSpent(timeSpent)
-                .build();
+        do {
+            boolean swapped = false;
+            for (int i = left; i <= right; i++) {
+                if (even ? array[i] % 2 != 0 : array[i] % 2 == 0) {
+                    continue;
+                }
+                if (first == null) {
+                    first = i;
+                } else {
+                    next = i;
+
+                    if (array[first] > array[next]) {
+                        swap(array, first, next);
+                        swapped = true;
+                        countPermutations++;
+                    }
+                    first = next;
+                }
+            }
+            right = first;
+            first = null;
+
+            if (swapped == false || right.equals(left)) {
+                break;
+            }
+
+            swapped = false;
+            for (int i = right; i >= left; i--) {
+                if (even ? array[i] % 2 != 0 : array[i] % 2 == 0) {
+                    continue;
+                }
+
+                if (first == null) {
+                    first = i;
+                } else {
+                    next = i;
+
+                    if (array[first] < array[next]) {
+                        swap(array, first, next);
+                        swapped = true;
+                        countPermutations++;
+                    }
+                    first = next;
+                }
+            }
+            left = first;
+            first = null;
+
+            if (swapped == false) {
+                break;
+            }
+        } while (left < right);
+
+        return getSortingResult(array, countPermutations, Duration.between(start, LocalDateTime.now()));
     }
 }
