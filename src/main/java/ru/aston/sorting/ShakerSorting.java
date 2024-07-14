@@ -70,7 +70,7 @@ public class ShakerSorting implements SortingStrategy {
         do {
             boolean swapped = false;
             for (int i = left; i <= right; i++) {
-                if (even ? array[i] % 2 != 0 : array[i] % 2 == 0) {
+                if (even == (array[i] % 2 != 0)) {
                     continue;
                 }
                 if (first == null) {
@@ -95,7 +95,7 @@ public class ShakerSorting implements SortingStrategy {
 
             swapped = false;
             for (int i = right; i >= left; i--) {
-                if (even ? array[i] % 2 != 0 : array[i] % 2 == 0) {
+                if (even == (array[i] % 2 != 0)) {
                     continue;
                 }
 
