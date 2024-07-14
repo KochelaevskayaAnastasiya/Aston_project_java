@@ -61,6 +61,42 @@ public class Main {
         System.out.println("3 - Рандомно");
         System.out.println("4 - Вернуться в главное меню");
     }
+
+    public static Integer[] getArrayMenu(Scanner scan){
+        Integer[] array = new Integer[0];
+        int choiceType = 0;
+        while (choiceType != 4) {
+            menuInput();
+            choiceType = scan.nextInt();
+            scan.nextLine();
+            switch (choiceType) {
+                case 1:
+                    int n1 = getArraySize(scan);
+                    if (n1 > 0) {
+                        System.out.println("Введите массив целых чисел через пробел:");
+                        String arrayString = scan.nextLine();
+                        array = getArray(scan, arrayString, n1);
+                        choiceType = 4;
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    int n3 = getArraySize(scan);
+                    if (n3 > 0) {
+                        array = new Random().ints(-100, 100).limit(n3).boxed().toArray(Integer[]::new);
+                        choiceType = 4;
+                    }
+                    break;
+                case 4:
+                    System.out.println("Возвращаемся в главное меню.");
+                    break;
+                default:
+                    System.out.println("Неверный ввод. Введите число от 1 до 4");
+            }
+        }
+        return array;
+    }
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         SortingStrategy sortingStrategy;
@@ -73,37 +109,7 @@ public class Main {
                 scan.nextLine();
                 switch (choice) {
                     case 1:
-                        int choiceType = 0;
-                        while (choiceType != 4) {
-                            menuInput();
-                            choiceType = scan.nextInt();
-                            scan.nextLine();
-                            switch (choiceType) {
-                                case 1:
-                                    int n1 = getArraySize(scan);
-                                    if (n1 > 0) {
-                                        System.out.println("Введите массив целых чисел через пробел:");
-                                        String arrayString = scan.nextLine();
-                                        array = getArray(scan, arrayString, n1);
-                                        choiceType = 4;
-                                    }
-                                    break;
-                                case 2:
-                                    break;
-                                case 3:
-                                    int n3 = getArraySize(scan);
-                                    if (n3 > 0) {
-                                        array = new Random().ints(-100, 100).limit(n3).boxed().toArray(Integer[]::new);
-                                        choiceType = 4;
-                                    }
-                                    break;
-                                case 4:
-                                    System.out.println("Возвращаемся в главное меню.");
-                                    break;
-                                default:
-                                    System.out.println("Неверный ввод. Введите число от 1 до 4");
-                            }
-                        }
+                        array = getArrayMenu(scan);
                         break;
                     case 2:
                         System.out.println("Gnome Sort");
