@@ -5,6 +5,30 @@ import ru.aston.sorting.SortingStrategy;
 import java.util.*;
 
 public class Main {
+    public static Integer[] getArray(Scanner scan, String arrayString, int n){
+        List<Integer> result = new ArrayList<>(
+                Arrays.stream(arrayString.split(" "))
+                        .map(Integer::parseInt)
+                        .toList());
+        boolean rightCount = false;
+        while (!rightCount) {
+            if (result.size() < n) {
+                System.out.printf("Количество элементов недостаточно! Введите еще %s элементов:%n", n - result.size());
+                String arrayStringAdd = scan.nextLine();
+                List<Integer> arrayAdd = Arrays.stream(arrayStringAdd.split(" "))
+                        .map(Integer::parseInt)
+                        .toList();
+                result.addAll(arrayAdd);
+            } else {
+                if (result.size() > n) {
+                    System.out.printf("Количество элементов превыщает размер массива. %s элементов было отброшено%n", result.size() - n);
+                    result = result.subList(0, n);
+                }
+                rightCount = true;
+            }
+        }
+        return result.toArray(Integer[]::new);
+    }
     public static int getArraySize(Scanner scanner) {
         System.out.println("Введите размер массива:");
         String sizeStr = scanner.nextLine();
@@ -60,29 +84,8 @@ public class Main {
                                     if (n1 > 0) {
                                         System.out.println("Введите массив целых чисел через пробел:");
                                         String arrayString = scan.nextLine();
-                                        List<Integer> result = new ArrayList<>(
-                                                Arrays.stream(arrayString.split(" "))
-                                                        .map(Integer::parseInt)
-                                                        .toList());
-                                        boolean rightCount = false;
-                                        while (!rightCount) {
-                                            if (result.size() < n1) {
-                                                System.out.printf("Количество введенных элементов недостаточно! Введите еще %s элементов:%n", n1 - result.size());
-                                                String arrayStringAdd = scan.nextLine();
-                                                List<Integer> arrayAdd = Arrays.stream(arrayStringAdd.split(" "))
-                                                        .map(Integer::parseInt)
-                                                        .toList();
-                                                result.addAll(arrayAdd);
-                                            } else {
-                                                if (result.size() > n1) {
-                                                    System.out.printf("Количество введенных элементов превыщает размер массива. %s элементов было отброшено%n", result.size() - n1);
-                                                    result = result.subList(0, n1);
-                                                }
-                                                rightCount = true;
-                                                choiceType = 4;
-                                            }
-                                        }
-                                        array = result.toArray(Integer[]::new);
+                                        array = getArray(scan, arrayString, n1);
+                                        choiceType = 4;
                                     }
                                     break;
                                 case 2:
