@@ -1,9 +1,14 @@
 package ru.aston;
 
 import java.io.*;
+
+import ru.aston.sorting.GnomeSort;
+import ru.aston.sorting.SortOption;
 import ru.aston.sorting.SortingStrategy;
 
 import java.util.*;
+
+import static ru.aston.sorting.SortOption.ALL;
 
 public class Main {
     public static Integer[] getArray(Scanner scan, String arrayString, int n){
@@ -115,6 +120,7 @@ public class Main {
                         while ((i = reader.read()) != -1){
                             result.append((char)i);
                         }
+                        System.out.println(result);
                         //    array = getArray...
                     } catch (FileNotFoundException e) {
                         System.out.println("Файл не найден. Повторите ввод.");
@@ -140,7 +146,7 @@ public class Main {
     }
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        //SortingStrategy sortingStrategy;
+        SortingStrategy sortingStrategy;
         int choice = 0;
         Integer[] array = new Integer[0];
         while (choice != 4) {
@@ -154,6 +160,9 @@ public class Main {
                         break;
                     case 2:
                         System.out.println("Gnome Sort");
+                        sortingStrategy = new GnomeSort();
+                        sortingStrategy.sort(array, ALL);//сортировать копию
+                        System.out.println(Arrays.toString(array));
                         break;
                     case 3:
                         System.out.println("Shaker Sort");
