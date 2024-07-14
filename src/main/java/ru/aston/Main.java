@@ -61,6 +61,31 @@ public class Main {
         System.out.println("3 - Рандомно");
         System.out.println("4 - Вернуться в главное меню");
     }
+    public static int menuTypeSorted(Scanner scan){
+        int choiceType = 0;
+        int typeSort = -1;
+        while (choiceType != 4) {
+            System.out.println("1 - Обычная сортировка");
+            System.out.println("2 - Только четные элементы");
+            System.out.println("3 - Только нечетные элементы");
+            choiceType = scan.nextInt();
+            scan.nextLine();
+            switch (choiceType) {
+                case 1:
+                    typeSort = 1;
+                    break;
+                case 2:
+                    typeSort = 2;
+                    break;
+                case 3:
+                    typeSort = 3;
+                    break;
+                default:
+                    System.out.println("Неверный ввод. Введите число от 1 до 3");
+            }
+        }
+        return typeSort;
+    }
 
     public static Integer[] getArrayMenu(Scanner scan){
         Integer[] array = new Integer[0];
