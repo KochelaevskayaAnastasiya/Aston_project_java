@@ -14,7 +14,7 @@ public class GnomeSortTest {
     private final SortingStrategy sorting = new GnomeSort();
 
     static Integer[] reverseArr(Integer[] array) {
-        Integer [] newArray = new Integer[array.length];
+        Integer[] newArray = new Integer[array.length];
 
         for (int i = 0; i < array.length; i++) {
             newArray[array.length - 1 - i] = array[i];
@@ -44,7 +44,7 @@ public class GnomeSortTest {
     @Test
     public void gnomeSortArrayTwoElement() {
         Integer[] arrayTest = {3, 1};
-        Integer[] sortArray =  reverseArr(arrayTest);
+        Integer[] sortArray = reverseArr(arrayTest);
         SortingResult sortingResult = sorting.sort(arrayTest, SortOption.ALL);
 
         assertArrayEquals(sortArray, sortingResult.getArray());
@@ -63,7 +63,7 @@ public class GnomeSortTest {
     @Test
     public void gnomeSortArrayAlreadySortedDescending() {
         Integer[] arrayTest = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        Integer[] sortArray =  reverseArr(arrayTest);
+        Integer[] sortArray = reverseArr(arrayTest);
         SortingResult sortingResult = sorting.sort(arrayTest, SortOption.ALL);
 
         assertArrayEquals(sortArray, sortingResult.getArray());
@@ -75,7 +75,7 @@ public class GnomeSortTest {
         Integer[] arrayTest = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         SortingResult sortingResult = sorting.sort(arrayTest, SortOption.EVEN);
 
-        assertArrayEquals(new Integer[] {2, 9, 4, 7, 6, 5, 8, 3, 10, 1}, sortingResult.getArray());
+        assertArrayEquals(new Integer[]{2, 9, 4, 7, 6, 5, 8, 3, 10, 1}, sortingResult.getArray());
         assertEquals(10, sortingResult.getCountPermutations());
     }
 
@@ -84,7 +84,7 @@ public class GnomeSortTest {
         Integer[] arrayTest = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         SortingResult sortingResult = sorting.sort(arrayTest, SortOption.ODD);
 
-        assertArrayEquals(new Integer[] {10, 1, 8, 3, 6, 5, 4, 7, 2, 9}, sortingResult.getArray());
+        assertArrayEquals(new Integer[]{10, 1, 8, 3, 6, 5, 4, 7, 2, 9}, sortingResult.getArray());
         assertEquals(10, sortingResult.getCountPermutations());
     }
 
@@ -114,7 +114,7 @@ public class GnomeSortTest {
         Integer[] arrayTest = {6, 0, 3, 4, 1, 8, 10, 10, 2, 0};
         SortingResult sortingResult = sorting.sort(arrayTest, SortOption.ODD);
 
-        assertArrayEquals(new Integer[] {6, 0, 1, 4, 3, 8, 10, 10, 2, 0}, sortingResult.getArray());
+        assertArrayEquals(new Integer[]{6, 0, 1, 4, 3, 8, 10, 10, 2, 0}, sortingResult.getArray());
     }
 
     @Test
@@ -134,7 +134,7 @@ public class GnomeSortTest {
         Integer[] arrayTest = {-2, -3, -1, 0, -7, -5, 0, -9, -10, -2};
         SortingResult sortingResult = sorting.sort(arrayTest, SortOption.ODD);
 
-        assertArrayEquals(new Integer[] {-2, -9, -7, 0, -5, -3, 0, -1, -10, -2}, sortingResult.getArray());
+        assertArrayEquals(new Integer[]{-2, -9, -7, 0, -5, -3, 0, -1, -10, -2}, sortingResult.getArray());
     }
 
     @Test
@@ -143,7 +143,7 @@ public class GnomeSortTest {
         Integer[] array = new Integer[1000];
 
         for (int i = 0; i < 1000; i++) {
-            array[i] = rand.nextInt(2001) - 1000;;
+            array[i] = rand.nextInt(2001) - 1000;
         }
 
         SortingResult sortingResult = sorting.sort(array, SortOption.ALL);
