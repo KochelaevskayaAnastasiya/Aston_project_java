@@ -1,0 +1,949 @@
+{
+	"info": {
+		"_postman_id": "e2fbd2b3-91b5-4fa8-9880-47caa6971003",
+		"name": "Aston",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32547807"
+	},
+	"item": [
+		{
+			"name": "Тест на пустой массив",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=&",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": ""
+						},
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест неизвестной сортировки",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.be.badRequest;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=1&view=SORT",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "1"
+						},
+						{
+							"key": "view",
+							"value": "SORT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Shaker массива с 1 элементом",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [1]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '0'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=1&view=SHAKER",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "1"
+						},
+						{
+							"key": "view",
+							"value": "SHAKER"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Gnome массива с 1 элементом",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [1]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '0'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=1&view=GNOME",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "1"
+						},
+						{
+							"key": "view",
+							"value": "GNOME"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки по умолчанию",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [-26,0,5,8,79]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(-26);\r",
+							"    pm.expect(jsonData.array[1]).to.eql(0);\r",
+							"    pm.expect(jsonData.array[2]).to.eql(5);\r",
+							"    pm.expect(jsonData.array[3]).to.eql(8);\r",
+							"    pm.expect(jsonData.array[4]).to.eql(79);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '5'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(5);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=5,8,-26,79,0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "5,8,-26,79,0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Shaker ALL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [-700,1,12,26,59]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(-700);\r",
+							"    pm.expect(jsonData.array[1]).to.eql(1);\r",
+							"    pm.expect(jsonData.array[2]).to.eql(12);\r",
+							"    pm.expect(jsonData.array[3]).to.eql(26);\r",
+							"    pm.expect(jsonData.array[4]).to.eql(59);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '5'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(5);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=12,26,1,-700,59&view=SHAKER&option=ALL",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "12,26,1,-700,59"
+						},
+						{
+							"key": "view",
+							"value": "SHAKER"
+						},
+						{
+							"key": "option",
+							"value": "ALL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Shaker ODD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [-1,-1,-42,3,0,2,8,57,65,6]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(-1);\r",
+							"    pm.expect(jsonData.array[1]).to.eql(-1);\r",
+							"    pm.expect(jsonData.array[2]).to.eql(-42);\r",
+							"    pm.expect(jsonData.array[3]).to.eql(3);\r",
+							"    pm.expect(jsonData.array[4]).to.eql(0);\r",
+							"    pm.expect(jsonData.array[5]).to.eql(2);\r",
+							"    pm.expect(jsonData.array[6]).to.eql(8);\r",
+							"    pm.expect(jsonData.array[7]).to.eql(57);\r",
+							"    pm.expect(jsonData.array[8]).to.eql(65);\r",
+							"    pm.expect(jsonData.array[9]).to.eql(6);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '4'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=-1,65,-42,-1,0,2,8,57,3,6&view=SHAKER&option=ODD",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "-1,65,-42,-1,0,2,8,57,3,6"
+						},
+						{
+							"key": "view",
+							"value": "SHAKER"
+						},
+						{
+							"key": "option",
+							"value": "ODD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Shaker EVEN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [45,-15,-28,2,5,-1,28]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(45);\r",
+							"    pm.expect(jsonData.array[1]).to.eql(-15);\r",
+							"    pm.expect(jsonData.array[2]).to.eql(-28);\r",
+							"    pm.expect(jsonData.array[3]).to.eql(2);\r",
+							"    pm.expect(jsonData.array[4]).to.eql(5);\r",
+							"    pm.expect(jsonData.array[5]).to.eql(-1);\r",
+							"    pm.expect(jsonData.array[6]).to.eql(28);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '1'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=45,-15,2,-28,5,-1,28&view=SHAKER&option=EVEN",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "45,-15,2,-28,5,-1,28"
+						},
+						{
+							"key": "view",
+							"value": "SHAKER"
+						},
+						{
+							"key": "option",
+							"value": "EVEN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Gnome ALL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [-700,1,12,26,59]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(-700);\r",
+							"    pm.expect(jsonData.array[1]).to.eql(1);\r",
+							"    pm.expect(jsonData.array[2]).to.eql(12);\r",
+							"    pm.expect(jsonData.array[3]).to.eql(26);\r",
+							"    pm.expect(jsonData.array[4]).to.eql(59);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '5'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(5);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=12,26,1,-700,59&view=GNOME&option=ALL",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "12,26,1,-700,59"
+						},
+						{
+							"key": "view",
+							"value": "GNOME"
+						},
+						{
+							"key": "option",
+							"value": "ALL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Gnome ODD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [-1,-1,-42,3,0,2,8,57,65,6]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(-1);\r",
+							"    pm.expect(jsonData.array[1]).to.eql(-1);\r",
+							"    pm.expect(jsonData.array[2]).to.eql(-42);\r",
+							"    pm.expect(jsonData.array[3]).to.eql(3);\r",
+							"    pm.expect(jsonData.array[4]).to.eql(0);\r",
+							"    pm.expect(jsonData.array[5]).to.eql(2);\r",
+							"    pm.expect(jsonData.array[6]).to.eql(8);\r",
+							"    pm.expect(jsonData.array[7]).to.eql(57);\r",
+							"    pm.expect(jsonData.array[8]).to.eql(65);\r",
+							"    pm.expect(jsonData.array[9]).to.eql(6);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '4'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=-1,65,-42,-1,0,2,8,57,3,6&view=GNOME&option=ODD",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "-1,65,-42,-1,0,2,8,57,3,6"
+						},
+						{
+							"key": "view",
+							"value": "GNOME"
+						},
+						{
+							"key": "option",
+							"value": "ODD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Тест сортировки Gnome EVEN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'array' equals [45,-15,-28,2,5,-1,28]\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('array');\r",
+							"    pm.expect(jsonData.array[0]).to.eql(45);\r",
+							"    pm.expect(jsonData.array[1]).to.eql(-15);\r",
+							"    pm.expect(jsonData.array[2]).to.eql(-28);\r",
+							"    pm.expect(jsonData.array[3]).to.eql(2);\r",
+							"    pm.expect(jsonData.array[4]).to.eql(5);\r",
+							"    pm.expect(jsonData.array[5]).to.eql(-1);\r",
+							"    pm.expect(jsonData.array[6]).to.eql(28);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'countPermutations' equals '1'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('countPermutations');\r",
+							"    pm.expect(jsonData.countPermutations).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sort has the 'timeSpent'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('timeSpent');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sort?array=45,-15,2,-28,5,-1,28&view=GNOME&option=EVEN",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sort"
+					],
+					"query": [
+						{
+							"key": "array",
+							"value": "45,-15,2,-28,5,-1,28"
+						},
+						{
+							"key": "view",
+							"value": "GNOME"
+						},
+						{
+							"key": "option",
+							"value": "EVEN"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
