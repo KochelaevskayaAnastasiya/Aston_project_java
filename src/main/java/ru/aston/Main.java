@@ -32,6 +32,7 @@ public class Main {
     public static Integer[] getArray(Scanner scan, String arrayString, int n){
         List<Integer> result = new ArrayList<>(
                 Arrays.stream(arrayString.split(" "))
+                        .filter(s -> !s.isEmpty())
                         .map(Integer::parseInt)
                         .toList());
         boolean rightCount = false;
@@ -40,6 +41,7 @@ public class Main {
                 System.out.printf("Количество элементов недостаточно! Введите еще %s элементов:%n", n - result.size());
                 String arrayStringAdd = scan.nextLine();
                 List<Integer> arrayAdd = Arrays.stream(arrayStringAdd.split(" "))
+                        .filter(s -> !s.isEmpty())
                         .map(Integer::parseInt)
                         .toList();
                 result.addAll(arrayAdd);
