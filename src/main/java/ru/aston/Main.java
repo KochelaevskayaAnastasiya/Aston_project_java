@@ -9,6 +9,45 @@ import java.util.*;
 import static ru.aston.sorting.SortOption.*;
 
 public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        SortingStrategy sortingStrategy;
+        int choice = 0;
+        Integer[] array = new Integer[0];
+        while (choice != 4) {
+            try {
+                mainMenu(array);
+                choice = scan.nextInt();
+                scan.nextLine();
+                switch (choice) {
+                    case 1:
+                        array = getArrayMenu(scan);
+                        break;
+                    case 2:
+                        System.out.println("Gnome Sort");
+                        sortingStrategy = new GnomeSort();
+                        sortArray(scan, sortingStrategy, array);
+                        break;
+                    case 3:
+                        System.out.println("Shaker Sort");
+                        sortingStrategy = new ShakerSorting();
+                        sortArray(scan, sortingStrategy, array);
+                        break;
+                    case 4:
+                        System.out.println("Завершение работы");
+                        break;
+                    default:
+                        System.out.println("Неверный ввод. Введите число от 1 до 4");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Неверный ввод. Числа должны быть целые.");
+            } catch (InputMismatchException e) {
+                System.out.println("Неверный ввод. Число должны быть целое.");
+                scan.nextLine();
+            }
+        }
+    }
+
     private static void mainMenu(Integer[] array){
         System.out.flush();
         System.out.println("=================================================");
@@ -130,10 +169,8 @@ public class Main {
                         }
                         array = getArray(scan, result.toString(), result.toString().split(" ").length);
                         choiceType = 4;
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Файл не найден. Повторите ввод.");
                     } catch (IOException e) {
-                        System.out.println(e.getMessage());
+                        System.out.println("Файл не найден. Повторите ввод.");
                     }
                     break;
                 case 3:
@@ -162,44 +199,5 @@ public class Main {
         System.out.println("Отсортированный массив: " + Arrays.toString(sortingResult.getArray()));
         System.out.println("Количество перестановок: " + sortingResult.getCountPermutations());
         System.out.println("Время: " + sortingResult.getTimeSpent().toMillis() / 1000.0 + " секунд");
-    }
-
-    public static void main(String[] args) { // перенести метод в самый верх
-        Scanner scan = new Scanner(System.in);
-        SortingStrategy sortingStrategy;
-        int choice = 0;
-        Integer[] array = new Integer[0];
-        while (choice != 4) {
-            try {
-                mainMenu(array);
-                choice = scan.nextInt();
-                scan.nextLine();
-                switch (choice) {
-                    case 1:
-                        array = getArrayMenu(scan);
-                        break;
-                    case 2:
-                        System.out.println("Gnome Sort");
-                        sortingStrategy = new GnomeSort();
-                        sortArray(scan, sortingStrategy, array);
-                        break;
-                    case 3:
-                        System.out.println("Shaker Sort");
-                        sortingStrategy = new ShakerSorting();
-                        sortArray(scan, sortingStrategy, array);
-                        break;
-                    case 4:
-                        System.out.println("Завершение работы");
-                        break;
-                    default:
-                        System.out.println("Неверный ввод. Введите число от 1 до 4");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Неверный ввод. Числа должны быть целые.");
-            } catch (InputMismatchException e) {
-                System.out.println("Неверный ввод. Число должны быть целое.");
-                scan.nextLine();
-            }
-        }
     }
 }
