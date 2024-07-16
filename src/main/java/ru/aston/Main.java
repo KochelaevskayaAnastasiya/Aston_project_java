@@ -2,14 +2,18 @@ package ru.aston;
 
 import java.io.*;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.aston.sorting.*;
 
 import java.util.*;
 
 import static ru.aston.sorting.SortOption.*;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
         Scanner scan = new Scanner(System.in);
         SortingStrategy sortingStrategy;
         int choice = 0;
