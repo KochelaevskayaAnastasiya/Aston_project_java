@@ -169,10 +169,8 @@ public class Main {
                         }
                         array = getArray(scan, result.toString(), result.toString().split(" ").length);
                         choiceType = 4;
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Файл не найден. Повторите ввод.");
                     } catch (IOException e) {
-                        System.out.println(e.getMessage());
+                        System.out.println("Файл не найден. Повторите ввод.");
                     }
                     break;
                 case 3:
