@@ -157,7 +157,7 @@ public class Main {
         SortingResult sortingResult = sortingStrategy.sort(copyArray, getTypeSorted(scan));
         System.out.println("Отсортированный массив: " + Arrays.toString(sortingResult.getArray()));
         System.out.println("Количество перестановок: " + sortingResult.getCountPermutations());
-        System.out.println("Время: " + sortingResult.getTimeSpent().getSeconds());
+        System.out.println("Время: " + sortingResult.getTimeSpent().toMillis() / 1000.0 + " секунд");
     }
 
     public static void main(String[] args) {
