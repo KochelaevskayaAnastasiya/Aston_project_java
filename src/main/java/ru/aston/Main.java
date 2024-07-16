@@ -39,7 +39,7 @@ public class Main {
                         break;
                     case 4:
                         System.out.println("Завершение работы");
-                        break;
+                        System.exit(0);
                     default:
                         System.out.println("Неверный ввод. Введите число от 1 до 4");
                 }
