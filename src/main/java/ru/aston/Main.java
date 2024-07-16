@@ -10,6 +10,25 @@ import java.util.*;
 import static ru.aston.sorting.SortOption.*;
 
 public class Main {
+    public static void mainMenu(Integer[] array){
+        System.out.flush();
+        System.out.println("=================================================");
+        System.out.println("Текущий массив:" + Arrays.toString(array));
+        System.out.println("=================================================");
+        System.out.println("1 - Добавить/изменить массив");
+        System.out.println("2 - Провести сортировку Gnome Sort");
+        System.out.println("3 - Провести сортировку Shaker Sort");
+        System.out.println("4 - Выход");
+    }
+
+    public static void menuInput(){
+        System.out.println("Выберете способ ввода данных");
+        System.out.println("1 - С консоли");
+        System.out.println("2 - Из файла");
+        System.out.println("3 - Рандомно");
+        System.out.println("4 - Вернуться в главное меню");
+    }
+
     public static Integer[] getArray(Scanner scan, String arrayString, int n){
         List<Integer> result = new ArrayList<>(
                 Arrays.stream(arrayString.split(" "))
@@ -34,6 +53,7 @@ public class Main {
         }
         return result.toArray(Integer[]::new);
     }
+
     public static int getArraySize(Scanner scanner) {
         System.out.println("Введите размер массива:");
         String sizeStr = scanner.nextLine();
@@ -51,22 +71,8 @@ public class Main {
             return -1;
         }
     }
-    public static void mainMenu(Integer[] array){
-        System.out.flush();
-        System.out.println("Текущий массив:" + Arrays.toString(array));
-        System.out.println("1 - Добавить/изменить массив");
-        System.out.println("2 - Провести сортировку Gnome Sort");
-        System.out.println("3 - Провести сортировку Shaker Sort");
-        System.out.println("4 - Выход");
-    }
-    public static void menuInput(){
-        System.out.println("Выберете способ ввода данных");
-        System.out.println("1 - С консоли");
-        System.out.println("2 - Из файла");
-        System.out.println("3 - Рандомно");
-        System.out.println("4 - Вернуться в главное меню");
-    }
-    public static SortOption menuTypeSorted(Scanner scan){
+
+    public static SortOption getTypeSorted(Scanner scan){
         int choiceType = 0;
         SortOption typeSort = null;
         while (choiceType != 4) {
@@ -122,8 +128,8 @@ public class Main {
                         while ((i = reader.read()) != -1){
                             result.append((char)i);
                         }
-                        System.out.println(result);
-                        //    array = getArray...
+                        array = getArray(scan, result.toString(), result.toString().split(" ").length);
+                        choiceType = 4;
                     } catch (FileNotFoundException e) {
                         System.out.println("Файл не найден. Повторите ввод.");
                     } catch (IOException e) {
@@ -148,7 +154,7 @@ public class Main {
     }
     public static void sortArray(Scanner scan, SortingStrategy sortingStrategy, Integer[] array){
         Integer[] copyArray = Arrays.copyOf(array, array.length);
-        SortingResult sortingResult = sortingStrategy.sort(copyArray, menuTypeSorted(scan));//сортировать копию
+        SortingResult sortingResult = sortingStrategy.sort(copyArray, getTypeSorted(scan));
         System.out.println("Отсортированный массив: " + Arrays.toString(sortingResult.getArray()));
         System.out.println("Количество перестановок: " + sortingResult.getCountPermutations());
         System.out.println("Время: " + sortingResult.getTimeSpent().getSeconds());
