@@ -7,7 +7,6 @@ import java.util.Arrays;
 import static ru.aston.sorting.ArraySortingHelper.*;
 import static ru.aston.sorting.SortOption.*;
 
-
 public class GnomeSort implements SortingStrategy {
 
     @Override
@@ -18,7 +17,7 @@ public class GnomeSort implements SortingStrategy {
         };
     }
 
-    public SortingResult gnomeSortAll(Integer[] array) {
+    private SortingResult gnomeSortAll(Integer[] array) {
         LocalDateTime start = LocalDateTime.now();
         int countPermutation = 0;
 
@@ -47,7 +46,7 @@ public class GnomeSort implements SortingStrategy {
         return getSortingResult(array, countPermutation, timeSpent);
     }
 
-    public SortingResult gnomeSortEvenOrOdd(Integer[] array, boolean even) {
+    private SortingResult gnomeSortEvenOrOdd(Integer[] array, boolean even) {
         Integer[] currentArray = Arrays.stream(array)
                 .filter(number -> {
                     if (even) {
@@ -76,6 +75,4 @@ public class GnomeSort implements SortingStrategy {
 
         return new SortingResult(array, sortingResult.getCountPermutations(), sortingResult.getTimeSpent());
     }
-
-
 }

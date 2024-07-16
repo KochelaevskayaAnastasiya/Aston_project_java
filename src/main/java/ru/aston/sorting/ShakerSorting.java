@@ -3,9 +3,8 @@ package ru.aston.sorting;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static ru.aston.sorting.ArraySortingHelper.swap;
+import static ru.aston.sorting.ArraySortingHelper.*;
 import static ru.aston.sorting.SortOption.*;
-import static ru.aston.sorting.ArraySortingHelper.getSortingResult;
 
 public class ShakerSorting implements SortingStrategy {
     @Override
