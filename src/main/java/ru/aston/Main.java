@@ -2,7 +2,6 @@ package ru.aston;
 
 import java.io.*;
 
-
 import ru.aston.sorting.*;
 
 import java.util.*;
@@ -10,7 +9,7 @@ import java.util.*;
 import static ru.aston.sorting.SortOption.*;
 
 public class Main {
-    public static void mainMenu(Integer[] array){
+    private static void mainMenu(Integer[] array){
         System.out.flush();
         System.out.println("=================================================");
         System.out.println("Текущий массив:" + Arrays.toString(array));
@@ -21,7 +20,7 @@ public class Main {
         System.out.println("4 - Выход");
     }
 
-    public static void menuInput(){
+    private static void menuInput(){
         System.out.println("Выберете способ ввода данных");
         System.out.println("1 - С консоли");
         System.out.println("2 - Из файла");
@@ -29,7 +28,7 @@ public class Main {
         System.out.println("4 - Вернуться в главное меню");
     }
 
-    public static Integer[] getArray(Scanner scan, String arrayString, int n){
+    private static Integer[] getArray(Scanner scan, String arrayString, int n){
         List<Integer> result = new ArrayList<>(
                 Arrays.stream(arrayString.split(" "))
                         .map(Integer::parseInt)
@@ -45,7 +44,8 @@ public class Main {
                 result.addAll(arrayAdd);
             } else {
                 if (result.size() > n) {
-                    System.out.printf("Количество элементов превыщает размер массива. %s элементов было отброшено%n", result.size() - n);
+                    System.out.printf("Количество элементов превыщает размер массива. %s элементов было отброшено%n",
+                            result.size() - n);
                     result = result.subList(0, n);
                 }
                 rightCount = true;
@@ -54,11 +54,11 @@ public class Main {
         return result.toArray(Integer[]::new);
     }
 
-    public static int getArraySize(Scanner scanner) {
+    private static int getArraySize(Scanner scanner) {
         System.out.println("Введите размер массива:");
-        String sizeStr = scanner.nextLine();
+        String inputSize = scanner.nextLine();
         try {
-            int size = Integer.parseInt(sizeStr);
+            int size = Integer.parseInt(inputSize);
             if (size <= 0) {
                 throw new IllegalArgumentException("Размер массива должен быть больше нуля. Попробуйте снова.");
             }
@@ -72,7 +72,7 @@ public class Main {
         }
     }
 
-    public static SortOption getTypeSorted(Scanner scan){
+    private static SortOption getTypeSorted(Scanner scan){
         int choiceType = 0;
         SortOption typeSort = null;
         while (choiceType != 4) {
@@ -101,7 +101,7 @@ public class Main {
         return typeSort;
     }
 
-    public static Integer[] getArrayMenu(Scanner scan){
+    private static Integer[] getArrayMenu(Scanner scan){
         Integer[] array = new Integer[0];
         int choiceType = 0;
         while (choiceType != 4) {
@@ -110,11 +110,11 @@ public class Main {
             scan.nextLine();
             switch (choiceType) {
                 case 1:
-                    int n1 = getArraySize(scan);
-                    if (n1 > 0) {
+                    int inputSize = getArraySize(scan);
+                    if (inputSize > 0) {
                         System.out.println("Введите массив целых чисел через пробел:");
                         String arrayString = scan.nextLine();
-                        array = getArray(scan, arrayString, n1);
+                        array = getArray(scan, arrayString, inputSize);
                         choiceType = 4;
                     }
                     break;
@@ -126,7 +126,7 @@ public class Main {
                         StringBuilder result = new StringBuilder();
                         int i;
                         while ((i = reader.read()) != -1){
-                            result.append((char)i);
+                            result.append((char) i);
                         }
                         array = getArray(scan, result.toString(), result.toString().split(" ").length);
                         choiceType = 4;
@@ -137,9 +137,12 @@ public class Main {
                     }
                     break;
                 case 3:
-                    int n3 = getArraySize(scan);
-                    if (n3 > 0) {
-                        array = new Random().ints(Integer.MIN_VALUE, Integer.MAX_VALUE).limit(n3).boxed().toArray(Integer[]::new);
+                    int arraySize = getArraySize(scan);
+                    if (arraySize > 0) {
+                        array = new Random().ints(Integer.MIN_VALUE, Integer.MAX_VALUE)
+                                .limit(arraySize)
+                                .boxed()
+                                .toArray(Integer[]::new);
                         choiceType = 4;
                     }
                     break;
@@ -152,7 +155,8 @@ public class Main {
         }
         return array;
     }
-    public static void sortArray(Scanner scan, SortingStrategy sortingStrategy, Integer[] array){
+
+    private static void sortArray(Scanner scan, SortingStrategy sortingStrategy, Integer[] array){
         Integer[] copyArray = Arrays.copyOf(array, array.length);
         SortingResult sortingResult = sortingStrategy.sort(copyArray, getTypeSorted(scan));
         System.out.println("Отсортированный массив: " + Arrays.toString(sortingResult.getArray()));
@@ -160,7 +164,7 @@ public class Main {
         System.out.println("Время: " + sortingResult.getTimeSpent().toMillis() / 1000.0 + " секунд");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // перенести метод в самый верх
         Scanner scan = new Scanner(System.in);
         SortingStrategy sortingStrategy;
         int choice = 0;
